@@ -80,4 +80,4 @@ const reqBody = {
   },
 }
 
-module.exports = apiMethods
+export default  apiMethods
