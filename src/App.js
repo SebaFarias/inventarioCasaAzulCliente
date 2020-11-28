@@ -1,9 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Table,
   Button,
   Container,
   Modal,
@@ -12,6 +10,7 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
+import Lista from './components/lista/Lista'
 
 const data = [
   { id: 1, personaje: "Naruto", anime: "Naruto" },
@@ -109,35 +108,7 @@ class App extends React.Component {
           <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
           <br />
           <br />
-          <Table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Personaje</th>
-                <th>Anime</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.personaje}</td>
-                  <td>{dato.anime}</td>
-                  <td>
-                    <Button
-                      color="primary"
-                      onClick={() => this.mostrarModalActualizar(dato)}
-                    >
-                      Editar
-                    </Button>{" "}
-                    <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <Lista data={this.state.data}/>
         </Container>
 
         <Modal isOpen={this.state.modalActualizar}>
