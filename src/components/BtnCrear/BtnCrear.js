@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button,Table } from "reactstrap";
+import { Button } from "reactstrap";
 
 const BtnCrear = () => {
 
