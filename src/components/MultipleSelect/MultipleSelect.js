@@ -26,7 +26,7 @@ const MultipleSelect = ( { opciones , multiple , title} ) => {
   }
   useEffect(()=>{
     console.log(title,'rerendering')
-  },selected.data)
+  },)
   return(
     <FormGroup>
       <label>
