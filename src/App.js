@@ -13,12 +13,31 @@ import {
 import Lista from './components/lista/Lista'
 
 const data = [
-  { id: 1, personaje: "Naruto", anime: "Naruto" },
-  { id: 2, personaje: "Goku", anime: "Dragon Ball" },
-  { id: 3, personaje: "Kenshin Himura", anime: "Rurouni Kenshin" },
-  { id: 4, personaje: "Monkey D. Luffy", anime: "One Piece" },
-  { id: 5, personaje: "Edward Elric", anime: "Fullmetal Alchemist: Brotherhood"},
-  { id: 6, personaje: "Seto Kaiba", anime: "Yu-Gi-Oh!" },
+  {
+      "categorias": null,
+      "pendiente": null,
+      "_id": "5fc225e68a0ca4349caf3ac7",
+      "nombre": null,
+      "estado": null,
+      "lugarFisico": null,
+      "createdAt": "2020-11-28T10:26:46.294Z",
+      "updatedAt": "2020-11-28T11:07:43.720Z",
+      "descripcion": null,
+      "destino": "Feria Navideña",
+      "valorEstimado": null,
+      "valorFinal": null
+  },
+  {
+      "categorias": [],
+      "pendiente": [],
+      "_id": "5fc22c688057b616f43e62d6",
+      "nombre": "Viejito",
+      "estado": "Como tuna",
+      "lugarFisico": "3er Piso",
+      "destino": "Feria Navideña",
+      "createdAt": "2020-11-28T10:54:32.551Z",
+      "updatedAt": "2020-11-28T10:54:32.551Z"
+  }
 ];
 
 class App extends React.Component {
@@ -58,25 +77,25 @@ class App extends React.Component {
     var contador = 0;
     var arreglo = this.state.data;
     arreglo.map((registro) => {
-      if (dato.id == registro.id) {
+      if (dato.id === registro.id) {
         arreglo[contador].personaje = dato.personaje;
         arreglo[contador].anime = dato.anime;
       }
-      contador++;
+      return contador++;
     });
     this.setState({ data: arreglo, modalActualizar: false });
   };
 
   eliminar = (dato) => {
     var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+dato.id);
-    if (opcion == true) {
+    if (opcion === true) {
       var contador = 0;
       var arreglo = this.state.data;
       arreglo.map((registro) => {
-        if (dato.id == registro.id) {
+        if (dato.id === registro.id) {
           arreglo.splice(contador, 1);
         }
-        contador++;
+        return contador++;
       });
       this.setState({ data: arreglo, modalActualizar: false });
     }
@@ -104,6 +123,7 @@ class App extends React.Component {
     return (
       <>
         <Container>
+          
         <br />
           <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
           <br />
