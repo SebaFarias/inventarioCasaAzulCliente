@@ -3,8 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import API from './APIcalls/apiCalls'
 import {
-  Container,
-  
+  Container,  
 } from "reactstrap";
 import Lista from './components/lista/Lista'
 import BtnCrear from './components/BtnCrear/BtnCrear'
@@ -22,6 +21,45 @@ const App = () => {
     show: "index",
     selected: null,
   })
+  const mostrarFormularioNuevo = () => {
+    setState( prevState => {
+      return({
+        ...prevState,
+        show: "new",
+        title: "Crear Item",
+      })
+    })
+    }
+    // const mostrarFormularioEditar = id => {
+      //   setState( prevState => {
+        //     return({
+    //       ...prevState,
+    //       show: "edit",
+    //       selected: id,
+    //       title: "Editar Item",
+    //     })
+    //   })
+    // }
+    const mostrarInicio = () => {
+      setState( prevState => {
+          return({
+          ...prevState,
+          show:"index",
+          title: "Inventario Casa Azul",
+        })
+      })
+    }
+  const refresh = async () => {
+    let newData = await API.getItems().then( res => {
+      return res.data
+    })
+    setState( prevState => {
+      return {
+        ...prevState,
+        data: newData
+      }
+    })
+  }
   const  main = show => {
     return (
       <main>
@@ -30,12 +68,12 @@ const App = () => {
             case 'index':
               return (
                 <div>
-                  <BtnCrear/>
+                  <BtnCrear crear={mostrarFormularioNuevo}/>
                   <Lista data={state.data}/> 
                 </div>
               )
             case 'new':
-              return < FormularioNuevo/>
+              return < FormularioNuevo volver={mostrarInicio}/>
             case 'edit':
               return < FormularioEditar item={state.selected}/>
             default:
@@ -45,51 +83,11 @@ const App = () => {
       </main>
     )
   }
-    // const mostrarFormularioNuevo = () => {
-    //   setState( prevState => {
-    //     return({
-    //       ...prevState,
-    //       show: "new",
-    //       title: "Crear Item",
-    //     })
-    //   })
-    // }
-    // const mostrarFormularioEditar = id => {
-    //   setState( prevState => {
-    //     return({
-    //       ...prevState,
-    //       show: "edit",
-    //       selected: id,
-    //       title: "Editar Item",
-    //     })
-    //   })
-    // }
-    // const mostrarInicio = () => {
-    //   setState( prevState => {
-    //     return({
-    //       ...prevState,
-    //       show:"index",
-    //       title: "Inventario Casa Azul",
-    //     })
-    //   })
-    // }
-    const refresh = async () => {
-      let newData = await API.getItems().then( res => {
-        return res.data
-      })
-      setState( prevState => {
-        return {
-          ...prevState,
-          data: newData
-        }
-      })
-    }
+  refresh()
   return (
   <Container>
     <h1>{state.title}</h1>
-    { main(state.show) } 
-    <button onClick= {refresh}>Actualizar</button>
-  
+    { main(state.show) }  
   </Container>
   )
 }
