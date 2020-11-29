@@ -1,87 +1,65 @@
-import React , {useState , useEffect} from 'react'
-import { FormGroup , ButtonGroup , Button} from 'reactstrap'
+import React , {useState} from 'react'
+import { FormGroup , ButtonGroup , Button , Label , Input , Col, Row, Container} from 'reactstrap'
 
-const MultipleSelect = ( { opciones , multiple , title} ) => {
+const MultipleSelect = ( { opciones , title , handlers} ) => {
 
-  const [ selected , setSelected ] = useState({
-    data: []
-  })
-  const onCheckboxBtnClick = opcion => {
-    const index = selected.data.indexOf(opcion);
-    if (index < 0) {
-      selected.data.push(opcion);
-    } else {
-      selected.data.splice(index, 1);
-    }
-    setSelected([...selected]);
-  }
-  const onMultipleCheckboxClick = opcion => {
-    const index = selected.data.indexOf(opcion);
-    if (index < 0) {
-      selected.data.push(opcion);
-    } else {
-      selected.data.splice(index, 1);
-    }
-    setSelected({...selected});
-  }
-  useEffect(()=>{
-    console.log(title,'rerendering')
-  },)
+  const [ selected , setSelected ] = useState(null)
+  const [register , errors ] = handlers
+  
   return(
+    
     <FormGroup>
+      <Container fluid="sm">
+        <Row>
+        <Col xs="3">
       <label>
         {title}
       </label>
-      {opciones.length < 2 ?
-        opciones[0].map( (opcion , index) => {
-          if(multiple){
-            return (
+        </Col>
+        <Col xs="9">
+        {opciones[0].map( (opcion , index) => {        
+          return(
             <ButtonGroup key={opcion}>
-              <Button 
-              key={opcion}
-              color="primary" 
-              onClick={() => onCheckboxBtnClick(opcion)} 
-              active={selected.data.includes(index)}
-              >
-                {opcion}
-              </Button>)
-            </ButtonGroup>
-            )
-          } else {
-        return(
-          <ButtonGroup key={opcion}>
           <Button 
             color="primary" 
             onClick={() => setSelected(index)} 
-            active={selected.data === index}
-          >
+            active={selected === index}
+            >
             {opcion}
           </Button>
       </ButtonGroup>
         )
       }
-    })
-      :
-      opciones[0].map( (opcion , index) => {
-        return (
-          <div  key={opcion}>
-        <ButtonGroup>
-          <Button 
-          key={opcion}
-          color="primary" 
-          onClick={() => multiple? onMultipleCheckboxClick(opcion) : setSelected(prevState=>{return{...prevState,data:index}})}  
-          active={multiple ? selected.data.includes(opcion) : selected.data === opcion }
-          >
-            {opcion}
-          </Button>
-        </ButtonGroup>
-          {selected.data.includes(index)?
-          console.log(opcion,'selected.data') : ''}
-        </div>
-        )
-  })}
+      )}
+      </Col>
+      </Row>
+      <Row>
+
+    <Label for={title}>{selected === null ? "Escoge un piso:" :`${opciones[0][selected]}: `}</Label>
+        <Input 
+          type="select" 
+          name="lugarFisico" 
+          id="lugarFisico" 
+          defaultValue=""
+          innerRef={register({
+            required: {
+              value: true,
+              message: "El Lugar es Obligatorio",
+            }
+          })}>
+            <option disabled value=''>Elige uno...</option>
+          {opciones[selected+1].map( lugar => {
+            return <option key={lugar}>{lugar}</option>
+          })}
+        </Input>
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.lugarFisico?.message}
+      </span>
+          </Row>
+      </Container>
     </FormGroup>
     )
 }
 
 export default MultipleSelect
+

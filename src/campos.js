@@ -1,10 +1,10 @@
 const Campos = {
-  estado:[[
+  estado:[
     "Bueno",
     "Regular",
     "Malo",
     "Reparación",
-]],
+],
   lugarFisico: [
     [
       "1° Piso",
@@ -39,13 +39,13 @@ const Campos = {
       "Sala Pieza"
     ],
   ],
-  destino: [[
+  destino: [
     "Reciclaje",
     "Basura",
     "Feria Navideña",
     "Venta",
     "Casa",
-  ]],
+  ],
   categoria:[
     [
       "Herramientas",

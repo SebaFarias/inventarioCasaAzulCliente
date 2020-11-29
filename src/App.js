@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState , useEffect} from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import API from './APIcalls/apiCalls'
@@ -10,9 +10,7 @@ import BtnCrear from './components/BtnCrear/BtnCrear'
 import FormularioNuevo from './components/FormularioNuevo/FormularioNuevo'
 import FormularioEditar from './components/FormularioEditar/FormularioEditar'
 
-const data = [
-
-];
+const data = [];
 
 const App = () => {
   const [ state , setState ] = useState({
@@ -50,13 +48,12 @@ const App = () => {
       })
     }
   const refresh = async () => {
-    let newData = await API.getItems().then( res => {
-      return res.data
-    })
+    const response = await API.getItems()
+    const newData = await response.json()
     setState( prevState => {
       return {
         ...prevState,
-        data: newData
+        data: newData.data
       }
     })
   }
@@ -75,7 +72,7 @@ const App = () => {
             case 'new':
               return < FormularioNuevo volver={mostrarInicio}/>
             case 'edit':
-              return < FormularioEditar item={state.selected}/>
+              return < FormularioEditar item={state.selected} volver={mostrarInicio}/>
             default:
               return null;
           }
@@ -83,7 +80,9 @@ const App = () => {
       </main>
     )
   }
-  refresh()
+  useEffect( () =>{
+    refresh()
+  },[])
   return (
   <Container>
     <h1>{state.title}</h1>

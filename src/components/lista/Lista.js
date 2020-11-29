@@ -1,9 +1,12 @@
 import React from 'react'
-import { Button,Table } from "reactstrap";
+import { Button,Table,Spinner } from "reactstrap";
 
 const Lista = ({data}) => {
 
 return(
+  data === []?
+  <Spinner color="light"/>
+  :
   <Table>
             <thead>
               <tr>

@@ -14,14 +14,7 @@ const apiMethods = {
     return response
   },
   getItems: async() => {
-    let response 
-    await fetch(`${API_URL}${ITEMS_ROUTE}/getItems`)
-    .then(res => {
-      response = res.json()
-    })
-    .catch( err => {
-      console.log(err)
-    })
+    const response =  await fetch(`${API_URL}${ITEMS_ROUTE}/getItems`)
     return response
   },
   createItem: async data => {

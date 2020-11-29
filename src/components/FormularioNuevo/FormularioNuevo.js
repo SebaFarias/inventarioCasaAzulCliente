@@ -1,100 +1,145 @@
-import React , {useState} from 'react'
-import {  Form , FormGroup , Button } from "reactstrap"
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import {  Form , FormGroup , Button , Label, Input } from "reactstrap"
+import API from '../../APIcalls/apiCalls'
 import Campos from '../../campos'
 import MultipleSelect from '../MultipleSelect/MultipleSelect'
 
 const FormularioNuevo = ({volver}) => {
 
-const [ info , setInfo ] = useState({
-  
-})
-
-const handleNew = () => {
-  volver()
-}
-
-const handleChange = event => {
-  const target = event.target.name
-  const value = event.target.value
-  setInfo( prevState => {
-    return ({
-      ...prevState,
-      [target] : value
-    })    
-  })
-}
-
+  const {register, errors, handleSubmit} = useForm()
+  const checkSubmit = (data) => {
+    API.createItem(data)
+    volver()
+  }
   return(
-    <Form>
+    <Form onSubmit={handleSubmit(checkSubmit)}> 
       <FormGroup>
-      <label>
+      <Label for="nombre">
         Nombre: 
-      <input
-        className="form-control"
-        value={info.nombre}
+      </Label>
+      <Input
+        className="form-control mb-2"
         name="nombre"
+        id="nombre"
         type="text"
-        onChange={handleChange}
-      />
-      </label>
+        innerRef={register({
+          required: {
+            value: true,
+            message: "El nombre es obligatorio",
+          }
+        })}
+        />
+      <span className="text-danger text-small d-block mb-2">
+          {errors?.nombre?.message}
+      </span>
       </FormGroup>
-      <MultipleSelect title={"Estado:"} opciones={Campos.estado} multiple={false}/>
-      <MultipleSelect title={"Lugar Físico:"} opciones={Campos.lugarFisico} multiple={false}/>
       <FormGroup>
-        <label>
+        <Label for="estado">Estado:</Label>
+        <Input 
+          type="select" 
+          name="estado" 
+          id="estado" 
+          defaultValue=""
+          innerRef={register({
+            required: {
+              value: true,
+              message: "El Estado es Obligatorio",
+            }
+          })}>
+            <option disabled value=''>Elige uno...</option>
+          {Campos.estado.map( estado => {
+            return <option key={estado}>{estado}</option>
+          })}
+        </Input>
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.estado?.message}
+      </span>
+      </FormGroup>
+      <FormGroup>
+      <MultipleSelect title={"Lugar Físico:"} opciones={Campos.lugarFisico} multiple={false} handlers={[register,errors]}/>
+      </FormGroup>
+      <FormGroup>
+        <Label for="descripcion">
           Descripción: 
+        </Label>
         <textarea
-          className="form-control"
-          value={info.nombre}
-          name="nombre"
+          className="form-control mb-2"
+          name="descripcion"
+          id="descripcion"
           rows="5"
           cols="20"
-          onChange={handleChange}
+          innerRef={register}
           />
-        </label>
-      </FormGroup>
-      <MultipleSelect title={"Destino:"} opciones={Campos.destino} multiple={false}/>
-      <MultipleSelect title={"Categorías:"} opciones={Campos.categoria} multiple={true}/>
-      <FormGroup>
-      
+          <span className="text-danger text-small d-block mb-2">
+            {errors?.descripcion?.message}
+          </span>
       </FormGroup>
       <FormGroup>
-      <label>
+        <Label for="destino">Destino:</Label>
+        <Input 
+          type="select" 
+          name="destino" 
+          id="destino" 
+          defaultValue=""
+          innerRef={register()}>
+            <option disabled value=''>Elige uno...</option>
+          {Campos.destino.map( destino => {
+            return <option key={destino}>{destino}</option>
+          })}
+        </Input>
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.destino?.message}
+      </span>
+      </FormGroup>
+      {/* <MultipleSelect title={"Categorías:"} opciones={Campos.categoria} multiple={true} handlers={[register,errors]}/> */}
+      <FormGroup>
+      <Label for="valorEstimado">
         Valor Estimado: 
-      <input
-        className="form-control"
-        value={info.nombre}
+      </Label>
+      <Input
+        className="form-control mb-2"
         name="valorEstimado"
+        id="valorEstimado"
         type="text"
-        onChange={handleChange}
-      />
-      </label>
+        innerRef={register}
+        />
+      <span className="text-danger text-small d-block mb-2">
+        {errors?.valorEstimado?.message}
+      </span>
       </FormGroup>
       <FormGroup>
-      <label>
+      <Label for="valorFinal">
         Valor Final: 
-      <input
-        className="form-control"
-        value={info.nombre}
+      </Label>
+      <Input
+        className="form-control mb-2"
         name="valorFinal"
+        id="valorFinal"
         type="text"
-        onChange={handleChange}
-      />
-      </label>
+        innerRef={register}
+        />
+      <span className="text-danger text-small d-block mb-2">
+        {errors?.valorFinal?.message}
+      </span>
       </FormGroup>
       <FormGroup>
-      <label>
+      <Label for="tareas">
         Tareas: 
-      <input
-        className="form-control"
-        value={info.nombre}
-        name="tareas"
-        type="text"
-        onChange={handleChange}
-      />
-      </label>
+      </Label>
+        <textarea
+          className="form-control mb-2"
+          name="tareas"
+          id="tareas"
+          rows="5"
+          cols="20"
+          innerRef={register}
+          />
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.tareas?.message}
+        </span>
       </FormGroup>
-      <Button onClick={handleNew} color="success">Agregar</Button>
+      <Button type="submit" color="success">Agregar</Button>
     </Form>
   )
 }
