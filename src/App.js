@@ -4,21 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import API from './APIcalls/apiCalls'
 import {
   Container,  
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import Lista from './components/lista/Lista'
-import BtnCrear from './components/BtnCrear/BtnCrear'
 import FormularioNuevo from './components/FormularioNuevo/FormularioNuevo'
 import FormularioEditar from './components/FormularioEditar/FormularioEditar'
 
-const data = [];
-
 const App = () => {
+  const [modal, setModal] = useState({
+    show: false,
+    message:'',
+  })
   const [ state , setState ] = useState({
-    title: "Inventario Casa Azul",
-    data: data,
-    show: "index",
+    title: 'Inventario Casa Azul',
+    data: [],
+    show: 'index',
     selected: null,
   })
+
   const mostrarFormularioNuevo = () => {
     setState( prevState => {
       return({
@@ -28,16 +34,22 @@ const App = () => {
       })
     })
     }
-    // const mostrarFormularioEditar = id => {
-      //   setState( prevState => {
-        //     return({
-    //       ...prevState,
-    //       show: "edit",
-    //       selected: id,
-    //       title: "Editar Item",
-    //     })
-    //   })
-    // }
+    const showModal = message => {
+      setModal({
+        show: true,
+        message: message
+      })
+    }
+    const mostrarFormularioEditar = id => {
+        setState( prevState => {
+            return({
+          ...prevState,
+          show: "edit",
+          selected: id,
+          title: "Editar Item",
+        })
+      })
+    }
     const mostrarInicio = () => {
       setState( prevState => {
           return({
@@ -48,13 +60,14 @@ const App = () => {
       })
     }
   const refresh = async () => {
-    const response = await API.getItems()
-    const newData = await response.json()
-    setState( prevState => {
-      return {
-        ...prevState,
-        data: newData.data
-      }
+    await API.getItems()
+    .then( res => {
+      setState( prevState => {
+        return {
+          ...prevState,
+          data: res.data ? res.data : []
+        }
+      })      
     })
   }
   const  main = show => {
@@ -65,14 +78,34 @@ const App = () => {
             case 'index':
               return (
                 <div>
-                  <BtnCrear crear={mostrarFormularioNuevo}/>
-                  <Lista data={state.data}/> 
+                  <br/>
+                  <Button onClick={mostrarFormularioNuevo} color="success">+ Nuevo</Button>
+                  <br/><br/>
+                  <Lista 
+                    data={state.data}
+                    editar={mostrarFormularioEditar}
+                    refresh={refresh}
+                    verModal={showModal}
+                  /> 
                 </div>
               )
             case 'new':
-              return < FormularioNuevo volver={mostrarInicio}/>
+              return( 
+                <FormularioNuevo 
+                  volver={mostrarInicio}
+                  refresh={refresh}
+                  verModal={showModal}
+                />
+              )
             case 'edit':
-              return < FormularioEditar item={state.selected} volver={mostrarInicio}/>
+              return (
+                <FormularioEditar
+                  item={state.selected}
+                  volver={mostrarInicio}
+                  refresh={refresh}
+                  verModal={showModal}
+                />
+              )
             default:
               return null;
           }
@@ -84,9 +117,22 @@ const App = () => {
     refresh()
   },[])
   return (
-  <Container>
+  <Container className={state.show==='index'?'text-center':''} >
     <h1>{state.title}</h1>
-    { main(state.show) }  
+    { main(state.show) }
+    <Modal isOpen={modal.show}>
+      <ModalBody>
+        {modal.message}
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          color="success"
+          onClick={()=>{setModal({show:false,message:''})}}
+        >
+          Ok
+        </Button>
+      </ModalFooter>
+    </Modal>
   </Container>
   )
 }

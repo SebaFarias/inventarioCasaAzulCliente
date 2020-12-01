@@ -17,20 +17,23 @@ const MultipleSelect = ( { opciones , title , handlers} ) => {
       </label>
         </Col>
         <Col xs="9">
+          <ButtonGroup 
+            name="piso"
+          >
         {opciones[0].map( (opcion , index) => {        
           return(
-            <ButtonGroup key={opcion}>
           <Button 
-            color="primary" 
+            key={opcion}
+            value={index+1} 
             onClick={() => setSelected(index)} 
             active={selected === index}
             >
             {opcion}
           </Button>
-      </ButtonGroup>
         )
       }
       )}
+      </ButtonGroup>
       </Col>
       </Row>
       <Row>

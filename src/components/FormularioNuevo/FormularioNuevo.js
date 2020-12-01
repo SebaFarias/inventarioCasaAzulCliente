@@ -5,15 +5,27 @@ import API from '../../APIcalls/apiCalls'
 import Campos from '../../campos'
 import MultipleSelect from '../MultipleSelect/MultipleSelect'
 
-const FormularioNuevo = ({volver}) => {
+const FormularioNuevo = ({ volver, refresh , verModal }) => {
 
   const {register, errors, handleSubmit} = useForm()
-  const checkSubmit = (data) => {
-    API.createItem(data)
-    volver()
+  const checkSubmit = async (data) => {
+    await API.createItem(data)
+    .then( data => {
+      verModal(data.message)
+      refresh()
+      volver()
+    })
   }
   return(
     <Form onSubmit={handleSubmit(checkSubmit)}> 
+    <Button 
+        color="success" 
+        onClick={()=>volver()}
+      >
+        Volver
+      </Button>
+        <br/>
+        <br/>
       <FormGroup>
       <Label for="nombre">
         Nombre: 

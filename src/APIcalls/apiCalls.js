@@ -14,7 +14,14 @@ const apiMethods = {
     return response
   },
   getItems: async() => {
-    const response =  await fetch(`${API_URL}${ITEMS_ROUTE}/getItems`)
+    let response 
+    await fetch(`${API_URL}${ITEMS_ROUTE}/getItems`)
+    .then(res => {
+      response = res.json()
+    })
+    .catch( err => {
+      console.log(err)
+    })
     return response
   },
   createItem: async data => {
@@ -53,7 +60,7 @@ const reqBody = {
   },
   deleteItem: async id => {
     let response
-    await fetch(`${API_URL}${ITEMS_ROUTE}/getItem/${id}`,{
+    await fetch(`${API_URL}${ITEMS_ROUTE}/deleteItem/${id}`,{
       method: 'DELETE',
       mode: 'cors',
       cache: 'no-cache',

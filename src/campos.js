@@ -1,11 +1,11 @@
 const Campos = {
   estado:[
-    "Vendivle",
-    "noVendible"
-    // "Bueno",
-    // "Regular",
-    // "Malo",    --Feria Navideña puts this off
-    // "Reparación",
+    // "Vendible", --> Feria Navideña?
+    // "noVendible"
+    "Bueno",
+    "Regular",
+    "Malo",    
+    "Reparación",
 ],
   lugarFisico: [
     [
