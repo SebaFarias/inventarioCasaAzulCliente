@@ -39,7 +39,7 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
         className="my-4"
         onClick={()=>volver()}
         >
-        Volver
+        <span>&#60;</span> Volver
       </Button>
       <FormGroup>
       <Label for="nombre">

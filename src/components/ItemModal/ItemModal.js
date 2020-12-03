@@ -57,7 +57,7 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
           data:[],
         })}
         >
-          Volver
+          <span>&#60;</span> Volver
         </Button>
         <Button
           color="primary"
