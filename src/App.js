@@ -8,6 +8,7 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from "reactstrap";
 import Lista from './components/lista/Lista'
 import FormularioNuevo from './components/FormularioNuevo/FormularioNuevo'
@@ -23,6 +24,7 @@ const App = () => {
     data: [],
     show: 'index',
     selected: null,
+    loading: false,
   })
 
   const mostrarFormularioNuevo = () => {
@@ -60,12 +62,19 @@ const App = () => {
       })
     }
   const refresh = async () => {
+    setState( prevState => {
+      return {
+        ...prevState,
+        loading: true,
+      }
+    })      
     await API.getItems()
     .then( res => {
       setState( prevState => {
         return {
           ...prevState,
-          data: res.data ? res.data : []
+          data: res.data ? res.data : [],
+          loading: false
         }
       })      
     })
@@ -77,17 +86,20 @@ const App = () => {
           switch (show) {
             case 'index':
               return (
-                <div>
+                <>
                   <br/>
                   <Button onClick={mostrarFormularioNuevo} color="success">+ Nuevo</Button>
                   <br/><br/>
+                  {state.loading?
+                  <Spinner/>:
                   <Lista 
                     data={state.data}
                     editar={mostrarFormularioEditar}
                     refresh={refresh}
                     verModal={showModal}
                   /> 
-                </div>
+                  }
+                </>
               )
             case 'new':
               return( 
