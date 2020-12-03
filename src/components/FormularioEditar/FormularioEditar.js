@@ -8,7 +8,6 @@ import lugarFisico from  '../../Hooks/lugarFisico'
 
 const FormularioEditar = ({ item, volver , refresh , verModal }) => {
   const normalize = itemData =>{
-    console.log('normalizando')
     const data = {}
     Object.keys(itemData).map( campo => {
       if(itemData[campo] && campo !== "createdAt" && campo !== "updatedAt" && campo !== "_id"){

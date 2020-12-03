@@ -23,7 +23,7 @@ const ConfirmModal = ({ open , message , estado , borrar }) => {
   </Button>
   <Button
     color="danger"
-    onClick={() => borrar()}
+    onClick={borrar}
   >
     Eliminar
   </Button>

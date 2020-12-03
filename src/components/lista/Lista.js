@@ -1,5 +1,5 @@
 import React , {useState} from 'react'
-import { Button, Table , Spinner} from "reactstrap"
+import { Table , Spinner} from "reactstrap"
 import API from '../../APIcalls/apiCalls'
 import ItemModal from '../ItemModal/ItemModal'
 import ConfirmModal from '../ConfirmModal/ConfimModal'
@@ -23,6 +23,10 @@ const eliminarClick = dato => {
   })
 }
 const eliminar = async() => {
+  setItemModal({
+    show: false,
+    data: [],
+  })
   await API.deleteItem(deleteModal.selectedID)
   .then( res => {
     refresh()
@@ -52,19 +56,18 @@ const modalEditar = (e,dato) => {
             <th>Nombre</th>
             <th>Estado</th>
             <th>Lugar</th>
-            <th>Acción</th>
           </tr>
         </thead>
 
         <tbody>
         {loading?
         <tr>
-        <td align="center" colSpan="5"><Spinner/></td>
+        <td align="center" colSpan="4"><Spinner/></td>
       </tr>
         :
         data.length < 1?
         <tr>
-          <td align="center" colSpan="5">No existen items en el Inventario</td>
+          <td align="center" colSpan="4">No existen items en el Inventario</td>
         </tr>
       :
           data.map(( dato , index ) => (
@@ -73,17 +76,6 @@ const modalEditar = (e,dato) => {
               <td>{dato.nombre}</td>
               <td>{dato.estado}</td>
               <td>{dato.lugarFisico}</td>
-              <td align="center">
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    editar(dato)
-                  }}
-                >
-                  Editar
-                </Button>{" "}
-                <Button color="danger" onClick={()=> eliminarClick(dato)}>Eliminar</Button>
-              </td>
             </tr>
           ))}
         </tbody>
@@ -99,6 +91,7 @@ const modalEditar = (e,dato) => {
         data={itemModal.data} 
         estado={setItemModal}
         edit={editar}
+        eliminar={eliminarClick}
       />      
     </>
   )

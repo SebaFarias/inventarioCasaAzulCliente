@@ -8,7 +8,7 @@ import {
 } from 'reactstrap'
 import Table from 'reactstrap/lib/Table'
 
-const ItemModal = ({ data , open , estado, edit }) => {
+const ItemModal = ({ data , open , estado, edit , eliminar}) => {
 
   return(
     <Modal isOpen={open}>
@@ -66,6 +66,14 @@ const ItemModal = ({ data , open , estado, edit }) => {
           }}
         >
           Editar
+        </Button>
+        <Button
+          color="danger"
+          onClick={() => {
+            eliminar(data)
+          }}
+        >
+          Eliminar
         </Button>
       </ModalFooter>
     </Modal>

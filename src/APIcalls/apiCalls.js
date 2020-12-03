@@ -1,4 +1,5 @@
-const API_URL = "https://inventario-casa-azul.herokuapp.com"
+//const API_URL = "https://inventario-casa-azul.herokuapp.com"// PRODUCTION
+const API_URL = "http://localhost:8080"//DEV
 const ITEMS_ROUTE = "/items"
 
 const apiMethods = {
