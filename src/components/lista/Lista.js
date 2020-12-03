@@ -1,10 +1,10 @@
 import React , {useState} from 'react'
-import { Button, Table } from "reactstrap"
+import { Button, Table , Spinner} from "reactstrap"
 import API from '../../APIcalls/apiCalls'
 import ItemModal from '../ItemModal/ItemModal'
 import ConfirmModal from '../ConfirmModal/ConfimModal'
 
-const Lista = ({ data , refresh , verModal , editar}) => {
+const Lista = ({ loading , data , refresh , verModal , editar}) => {
   const [deleteModal, setDeleteModal] = useState({
     show: false,
     message:"",
@@ -57,7 +57,12 @@ const modalEditar = (e,dato) => {
         </thead>
 
         <tbody>
-        {data.length < 1?
+        {loading?
+        <tr>
+        <td align="center" colSpan="5"><Spinner/></td>
+      </tr>
+        :
+        data.length < 1?
         <tr>
           <td align="center" colSpan="5">No existen items en el Inventario</td>
         </tr>

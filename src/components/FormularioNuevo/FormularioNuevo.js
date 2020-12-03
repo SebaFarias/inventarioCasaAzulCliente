@@ -20,12 +20,11 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
     <Form onSubmit={handleSubmit(checkSubmit)}> 
     <Button 
         color="success" 
+        className="my-4"
         onClick={()=>volver()}
       >
         Volver
       </Button>
-        <br/>
-        <br/>
       <FormGroup>
       <Label for="nombre">
         Nombre: 

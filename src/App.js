@@ -8,7 +8,6 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
-  Spinner,
 } from "reactstrap";
 import Lista from './components/lista/Lista'
 import FormularioNuevo from './components/FormularioNuevo/FormularioNuevo'
@@ -87,18 +86,20 @@ const App = () => {
             case 'index':
               return (
                 <>
-                  <br/>
-                  <Button onClick={mostrarFormularioNuevo} color="success">+ Nuevo</Button>
-                  <br/><br/>
-                  {state.loading?
-                  <Spinner/>:
+                  <Button 
+                    onClick={mostrarFormularioNuevo} 
+                    color="success"
+                    className="my-4"
+                  >
+                    + Nuevo
+                  </Button>
                   <Lista 
+                    loading={state.loading}
                     data={state.data}
                     editar={mostrarFormularioEditar}
                     refresh={refresh}
                     verModal={showModal}
                   /> 
-                  }
                 </>
               )
             case 'new':
@@ -128,9 +129,11 @@ const App = () => {
   useEffect( () =>{
     refresh()
   },[])
+
+  
   return (
   <Container className={state.show==='index'?'text-center':''} >
-    <h1>{state.title}</h1>
+    <h1 className="text-center my-4">{state.title}</h1>
     { main(state.show) }
     <Modal isOpen={modal.show}>
       <ModalBody>

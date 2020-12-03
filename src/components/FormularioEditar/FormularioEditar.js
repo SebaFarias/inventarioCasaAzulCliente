@@ -4,13 +4,15 @@ import {  Form , FormGroup , Button , Label, Input } from "reactstrap"
 import API from '../../APIcalls/apiCalls'
 import Campos from '../../campos'
 import MultipleSelect from '../MultipleSelect/MultipleSelect'
+import lugarFisico from  '../../Hooks/lugarFisico'
 
-const FormularioNuevo = ({ item, volver , refresh , verModal }) => {
-  const normalize = item =>{
+const FormularioEditar = ({ item, volver , refresh , verModal }) => {
+  const normalize = itemData =>{
+    console.log('normalizando')
     const data = {}
-    Object.keys(item).map( campo => {
-      if(item[campo] && campo !== "createdAt" && campo !== "updatedAt" && campo !== "_id"){
-        data[campo] = item[campo]
+    Object.keys(itemData).map( campo => {
+      if(itemData[campo] && campo !== "createdAt" && campo !== "updatedAt" && campo !== "_id"){
+        data[campo] = itemData[campo]
       }
       return null
     })
@@ -35,12 +37,11 @@ const FormularioNuevo = ({ item, volver , refresh , verModal }) => {
     <Form onSubmit={handleSubmit(checkSubmit)}> 
       <Button 
         color="success" 
+        className="my-4"
         onClick={()=>volver()}
         >
         Volver
       </Button>
-        <br/>
-        <br/>
       <FormGroup>
       <Label for="nombre">
         Nombre: 
@@ -84,7 +85,13 @@ const FormularioNuevo = ({ item, volver , refresh , verModal }) => {
       </span>
       </FormGroup>
       <FormGroup>
-      <MultipleSelect title={"Lugar Físico:"} opciones={Campos.lugarFisico} multiple={false} handlers={[register,errors]}/>
+      <MultipleSelect 
+        title={"Lugar Físico:"} 
+        init={lugarFisico.JSONToForm(item).piso}
+        opciones={Campos.lugarFisico} 
+        multiple={false} 
+        handlers={[register,errors]}
+      />
       </FormGroup>
       <FormGroup>
         <Label for="descripcion">
@@ -171,4 +178,4 @@ const FormularioNuevo = ({ item, volver , refresh , verModal }) => {
   )
 }
 
-export default FormularioNuevo
+export default FormularioEditar

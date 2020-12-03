@@ -1,9 +1,9 @@
 import React , {useState} from 'react'
 import { FormGroup , ButtonGroup , Button , Label , Input , Col, Row, Container} from 'reactstrap'
 
-const MultipleSelect = ( { opciones , title , handlers} ) => {
+const MultipleSelect = ( { init , opciones , title , handlers} ) => {
 
-  const [ selected , setSelected ] = useState(null)
+  const [ selected , setSelected ] = useState(init?init-1:null)
   const [register , errors ] = handlers
   
   return(
