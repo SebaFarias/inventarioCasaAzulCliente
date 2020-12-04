@@ -37,8 +37,11 @@ const MultipleSelect = ( { init , opciones , title , handlers} ) => {
       </Col>
       </Row>
       <Row>
-
-    <Label for={title}>{selected === null ? "Escoge un piso:" :`${opciones[0][selected]}: `}</Label>
+        <Label 
+          for="lugarFisico"
+        >
+          {selected === null ? "Escoge un piso:" :`${opciones[0][selected]}: `}
+        </Label>
         <Input 
           type="select" 
           name="lugarFisico" 

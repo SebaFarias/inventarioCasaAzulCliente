@@ -4,7 +4,9 @@ import {  Form , FormGroup , Button , Label, Input } from "reactstrap"
 import API from '../../APIcalls/apiCalls'
 import Campos from '../../campos'
 import MultipleSelect from '../MultipleSelect/MultipleSelect'
+import CategoriaSelect from '../CategoriaSelect/CategoriaSelect'
 import lugarFisico from  '../../Hooks/lugarFisico'
+import categorias from '../../Hooks/categorias'
 
 const FormularioEditar = ({ item, volver , refresh , verModal }) => {
   const normalize = itemData =>{
@@ -43,7 +45,7 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
       </Button>
       <FormGroup>
       <Label for="nombre">
-        Nombre: 
+        Nombre: (Ej: Jarrón Rojo)
       </Label>
       <Input
         className="form-control mb-2"
@@ -125,7 +127,6 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
           {errors?.destino?.message}
       </span>
       </FormGroup>
-      {/* <MultipleSelect title={"Categorías:"} opciones={Campos.categoria} multiple={true} handlers={[register,errors]}/> */}
       <FormGroup>
       <Label for="valorEstimado">
         Valor Estimado: 
@@ -156,20 +157,25 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
         {errors?.valorFinal?.message}
       </span>
       </FormGroup>
+      <CategoriaSelect 
+          initial={item.categorias?categorias.arrayToJSON(item.categorias):null}
+          opciones={Campos.categoria}
+          handlers={[register,errors]}
+        />
       <FormGroup>
-      <Label for="tareas">
-        Tareas: 
+      <Label for="pendiente">
+        Tareas pendientes: 
       </Label>
         <textarea
           className="form-control mb-2"
-          name="tareas"
-          id="tareas"
+          name="pendiente"
+          id="pendiente"
           rows="5"
           cols="20"
           innerRef={register}
           />
         <span className="text-danger text-small d-block mb-2">
-          {errors?.tareas?.message}
+          {errors?.pendiente?.message}
         </span>
       </FormGroup>
       <Button type="submit" color="success">Guardar</Button>

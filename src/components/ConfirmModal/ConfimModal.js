@@ -10,7 +10,11 @@ const ConfirmModal = ({ open , message , estado , borrar }) => {
   }
 
   return(
-    <Modal isOpen={open}>
+    <Modal 
+    isOpen={open}
+    centered
+    toggle={() => estado(initial)}
+    >
     <ModalBody>
       {message}
     </ModalBody>

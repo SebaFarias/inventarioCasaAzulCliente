@@ -68,10 +68,10 @@ const Campos = {
       "Electrica",
     ],
     [
-      "Hombre",
-      "Mujer",
-      "Niños",
-      "Niñas",
+      "Superior",
+      "Inferior",
+      "Niñes",
+      "Guagua"
     ],
     [ 
       "Hombre",
@@ -86,9 +86,9 @@ const Campos = {
       "Utensilio",
     ],
     [
-      "Cocina",
+      "Linea blanca",
       "Entretenimiento",
-      "Aseo",
+      "Limpieza",
       "Aparato",
     ],
     ["libros"],

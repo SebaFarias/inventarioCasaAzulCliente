@@ -1,0 +1,11 @@
+/* The heart of the matter */
+.btn-matrix { 
+  flex-wrap: wrap; 
+}
+.btn-matrix > .btn:nth-child(3n+4) {
+  clear: left;
+  margin-left: 0;
+}
+.btn-matrix > .btn {
+  border-radius: 0 !important;
+}

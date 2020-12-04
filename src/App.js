@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import Lista from './components/lista/Lista'
+import Lista from './components/Lista/Lista'
 import FormularioNuevo from './components/FormularioNuevo/FormularioNuevo'
 import FormularioEditar from './components/FormularioEditar/FormularioEditar'
 
@@ -135,7 +135,11 @@ const App = () => {
   <Container className={state.show==='index'?'text-center':''} >
     <h1 className="text-center my-4">{state.title}</h1>
     { main(state.show) }
-    <Modal isOpen={modal.show}>
+    <Modal 
+      isOpen={modal.show}
+      centered
+      toggle={()=>{setModal({show:false,message:''})}}
+      >
       <ModalBody>
         {modal.message}
       </ModalBody>
