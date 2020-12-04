@@ -1,4 +1,3 @@
-import Campos from '../campos'
 
 const categorias = {
   arrayToJSON: data => {
