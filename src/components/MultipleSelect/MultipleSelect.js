@@ -58,8 +58,8 @@ const MultipleSelect = ( { init , opciones , title , handlers} ) => {
             return <option key={lugar}>{lugar}</option>
           })}
         </Input>
-        <span className="text-danger text-small d-block mb-2">
-          {errors?.lugarFisico?.message}
+      <span className="text-danger text-small d-block mb-2">
+        {errors?.lugarFisico?.message}
       </span>
           </Row>
       </Container>

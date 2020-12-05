@@ -1,22 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import {  Form , FormGroup , Button , Label, Input } from "reactstrap"
 import API from '../../APIcalls/apiCalls'
 import Campos from '../../campos'
 import categorias from '../../Hooks/categorias'
+import tareas from '../../Hooks/tareas'
 import MultipleSelect from '../MultipleSelect/MultipleSelect'
 import CategoriaSelect from '../CategoriaSelect/CategoriaSelect'
+import TareaInput from '../TareaInput/TareaInput' 
 
 const FormularioNuevo = ({ volver, refresh , verModal }) => {
 
   const {register, errors, handleSubmit} = useForm()
   const checkSubmit = async (data) => {
     data.categorias = categorias.textToArray(data.categorias)
+    data.pendiente = tareas.oneStringToStringArray(data.pendiente)
+    console.log(data)
     await API.createItem(data)
     .then( data => {
       verModal(data.message)
       refresh()
       volver()
+    })
+  }
+  const [campos , setCampos] = useState({
+    destinoIsFeria: false,
+  })
+  const handleDestino = event => {
+    const isFeria = event.target.value === "Feria Navideña"
+    setCampos( prevState =>{
+      return ({
+        ...prevState,
+        destinoIsFeria: isFeria
+      })
     })
   }
   return(
@@ -66,8 +82,8 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
             return <option key={estado}>{estado}</option>
           })}
         </Input>
-        <span className="text-danger text-small d-block mb-2">
-          {errors?.estado?.message}
+      <span className="text-danger text-small d-block mb-2">
+          {errors?.estado?.message }
       </span>
       </FormGroup>
       <FormGroup>
@@ -77,14 +93,13 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
         <Label for="descripcion">
           Descripción: 
         </Label>
-        <textarea
+        <Input 
           className="form-control mb-2"
+          type="textarea" 
           name="descripcion"
           id="descripcion"
-          rows="5"
-          cols="20"
-          innerRef={register}
-          />
+          innerRef={register()}
+        />
           <span className="text-danger text-small d-block mb-2">
             {errors?.descripcion?.message}
           </span>
@@ -96,6 +111,7 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
           name="destino" 
           id="destino" 
           defaultValue=""
+          onChange={handleDestino}
           innerRef={register()}>
             <option disabled value=''>Elige uno...</option>
           {Campos.destino.map( destino => {
@@ -106,56 +122,47 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
           {errors?.destino?.message}
       </span>
       </FormGroup>
-      <FormGroup>
-      <Label for="valorEstimado">
-        Valor Estimado: 
-      </Label>
-      <Input
-        className="form-control mb-2"
-        name="valorEstimado"
-        id="valorEstimado"
-        type="text"
-        innerRef={register}
-        />
-      <span className="text-danger text-small d-block mb-2">
-        {errors?.valorEstimado?.message}
-      </span>
-      </FormGroup>
-      <FormGroup>
-      <Label for="valorFinal">
-        Valor Final: 
-      </Label>
-      <Input
-        className="form-control mb-2"
-        name="valorFinal"
-        id="valorFinal"
-        type="text"
-        innerRef={register}
-        />
-      <span className="text-danger text-small d-block mb-2">
-        {errors?.valorFinal?.message}
-      </span>
-      </FormGroup>
+      {campos.destinoIsFeria?
+      <>
+        <FormGroup>
+        <Label for="valorEstimado">
+          Valor Estimado: 
+        </Label>
+        <Input
+          className="form-control mb-2"
+          name="valorEstimado"
+          id="valorEstimado"
+          type="text"
+          innerRef={register()}
+          />
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.valorEstimado?.message}
+        </span>
+        </FormGroup>
+        <FormGroup>
+        <Label for="valorFinal">
+          Valor Final: 
+        </Label>
+        <Input
+          className="form-control mb-2"
+          name="valorFinal"
+          id="valorFinal"
+          type="text"
+          innerRef={register()}
+          />
+        <span className="text-danger text-small d-block mb-2">
+          {errors?.valorFinal?.message}
+        </span>
+        </FormGroup>
+      </>:''}
+      
         <CategoriaSelect 
           opciones={Campos.categoria}
           handlers={[register,errors]}
-        />
-      <FormGroup>
-      <Label for="pendiente">
-        Tareas pendientes: 
-      </Label>
-        <textarea
-          className="form-control mb-2"
-          name="pendiente"
-          id="pendiente"
-          rows="5"
-          cols="20"
-          innerRef={register}
           />
-        <span className="text-danger text-small d-block mb-2">
-          {errors?.pendiente?.message}
-        </span>
-      </FormGroup>
+      <TareaInput        
+        handlers={[register,errors]}
+      />
       <Button type="submit" color="success">Agregar</Button>
     </Form>
   )

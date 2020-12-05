@@ -8,14 +8,14 @@ const categorias = {
     return dataNormalized
   },
   textToArray: data => {
-    return data.split(' , ')
+    return data.split(',')
   },
   arrayToText: data => {
-    return data.join(' , ')
+    return data.join(',')
   },
   JSONToText: data => {
     const categoriasArray = Object.keys(data)
-    const dataNormalized = categoriasArray.join(' , ')
+    const dataNormalized = categoriasArray.join(',')
     return dataNormalized
   }
 }
