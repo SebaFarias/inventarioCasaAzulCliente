@@ -56,21 +56,31 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
               <td>Destino</td>
               <td align="right">{data.destino}</td>
             </tr>
-            <tr>
-              <td>Valor Estimado</td>
-              <td align="right">{data.valorEstimado}</td>
-            </tr>
-            <tr>
-              <td>Valor Final</td>
-              <td align="right">{data.valorFinal}</td>
-            </tr>
+            {data.destino === "Feria Navideña"?
+            <>
+              <tr>
+                <td>Valor Estimado</td>
+                <td align="right">{data.valorEstimado}</td>
+              </tr>
+              <tr>
+                <td>Valor Final</td>
+                <td align="right">{data.valorFinal}</td>
+              </tr>
+            </>
+            :''}
             <tr>
               <td>Categorías</td>
-              <td align="right">{data.categorias?categorias.arrayToText(data.categorias):''}</td>
+              <td align="right" >{data.categorias?categorias.arrayToText(data.categorias).replace(',',' , '):''}</td>
             </tr>
             <tr>
               <td>Tareas</td>
-              <td align="right">{data.tareas}</td>
+              <td align="right">
+                <ul>
+                {data.pendiente?.map( tarea => {
+                  return <li key={tarea}>{tarea}</li>
+                })}
+                </ul>
+              </td>
             </tr>
           </tbody>
         </Table>
