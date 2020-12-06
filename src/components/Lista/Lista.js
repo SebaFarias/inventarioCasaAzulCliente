@@ -62,7 +62,7 @@ const modalEditar = (e,dato) => {
         <tbody>
         {loading?
         <tr>
-        <td align="center" colSpan="4"><Spinner/></td>
+        <td align="center" colSpan="4"><Spinner style={{ width: '5rem', height: '5rem' }} /></td>
       </tr>
         :
         data.length < 1?
