@@ -6,6 +6,8 @@ import {
   ModalFooter,
   Table, 
   Button,
+  ListGroup,
+  ListGroupItem
 } from 'reactstrap'
 import categorias from '../../Hooks/categorias'
 
@@ -22,10 +24,10 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
   return(
     <Modal 
       isOpen={open} 
-      toggle={toggle} 
+      toggle={toggle}       
       centered
     >
-      <ModalHeader cssModule={{'modal-title': 'w-100 d-flex justify-content-center align-items-center'}}>
+      <ModalHeader className="recuadro" cssModule={{'modal-title': 'w-100 d-flex justify-content-center align-items-center'}}>
         <div className="text-center w-100">{data.nombre}</div>
           <img 
             className="rounded"
@@ -33,62 +35,74 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
             alt="Miniatura del Item solicitado"
           ></img>         
       </ModalHeader>
-      <ModalBody>
-        <Table>
-          <thead>
-          <tr>
-            <th colSpan="2" className="text-center">Detalles</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Estado</td>
-              <td align="right">{data.estado}</td>
-            </tr>
-            <tr>
-              <td>Lugar</td>
-              <td align="right">{data.lugarFisico}</td>
-            </tr>
-            <tr>
-              <td>Descripcion</td>
-              <td align="right">{data.descripcion}</td>
-            </tr>
-            <tr>
-              <td>Destino</td>
-              <td align="right">{data.destino}</td>
-            </tr>
+      <ModalBody className="recuadro">
+        <ListGroup flush>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-center"
+            >
+              Detalles
+            </ListGroupItem>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-between"
+            >
+              <div>Estado</div>
+              <div>{data.estado}</div>
+            </ListGroupItem>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-between"
+            >
+              <div>Lugar</div>
+              <div>{data.lugarFisico}</div>
+            </ListGroupItem>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-between"
+            >
+              <div>Descripcion</div>
+              <div>{data.descripcion}</div>
+            </ListGroupItem>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-between"
+            >
+              <div>Destino</div>
+              <div>{data.destino}</div>
+            </ListGroupItem>
             {data.destino === "Feria Navideña"?
-            <>
-              <tr>
-                <td>Valor Estimado</td>
-                <td align="right">{data.valorEstimado}</td>
-              </tr>
-              <tr>
-                <td>Valor Final</td>
-                <td align="right">{data.valorFinal}</td>
-              </tr>
-            </>
+              <>
+                <ListGroupItem 
+                  className="recuadro py-2 d-flex justify-content-between"
+                >
+                  <div>Valor Estimado</div>
+                  <div>{data.valorEstimado}</div>
+                </ListGroupItem>
+                <ListGroupItem 
+                  className="recuadro py-2 d-flex justify-content-between"
+                >
+                  <div>Valor Final</div>
+                  <div>{data.valorFinal}</div>
+                </ListGroupItem>
+              </>
             :''}
-            <tr>
-              <td>Categorías</td>
-              <td align="right" >{data.categorias?categorias.arrayToText(data.categorias).replace(',',' , '):''}</td>
-            </tr>
-            <tr>
-              <td>Tareas</td>
-              <td align="right">
-                <ul>
-                {data.pendiente?.map( tarea => {
-                  return <li key={tarea}>{tarea}</li>
-                })}
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+            <ListGroupItem 
+              className="recuadro py-2 d-flex justify-content-between"
+            >
+              <div>Categorías</div>
+              <div className="text-right">{data.categorias?categorias.arrayToText(data.categorias).replace(/,/gi,' , '):''}</div>
+            </ListGroupItem>
+            <ListGroupItem 
+                  className="recuadro py-2 d-flex justify-content-between"
+                >
+                  <div>Tareas</div>
+                  <ul>
+                    {data.pendiente?.map( tarea => {
+                      return <li key={tarea}>{tarea}</li>
+                    })}
+                  </ul>
+                </ListGroupItem>
+        </ListGroup>
       </ModalBody>
-      <ModalFooter>
+      <ModalFooter className="recuadro">
         <Button
-        color="success"
+        className="boton-azul"
         onClick={() => estado({
           show: false,
           data:[],
@@ -97,7 +111,7 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
           <span>&#60;</span> Volver
         </Button>
         <Button
-          color="primary"
+          className="boton-azul"
           onClick={() => {
             edit(data)
           }}

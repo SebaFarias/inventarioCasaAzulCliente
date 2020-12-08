@@ -15,7 +15,6 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
   const checkSubmit = async (data) => {
     data.categorias = categorias.textToArray(data.categorias)
     data.pendiente = tareas.oneStringToStringArray(data.pendiente)
-    console.log(data)
     await API.createItem(data)
     .then( data => {
       verModal(data.message)

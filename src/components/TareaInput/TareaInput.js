@@ -62,29 +62,30 @@ const TareaInput = ({ initial , handlers }) => {
           className="form-control mb-2"
           type="Text"
           id="pendiente"
+          value={tareas.nueva}
           onChange={handleChange}
         />
         <InputGroupAddon addonType="append">
           <Button
             color="primary"
             className="form-control mb-2 boton-azul"
-            value={tareas.nueva}
             onClick={addTarea}
           >
             +
           </Button>
         </InputGroupAddon>
       </InputGroup>
-      <ListGroup flush className="lista-tarea">
+      <ListGroup flush>
         {tareas.todas.map( tarea => {
           return(
           <ListGroupItem 
             key={tarea}
+            className="recuadro lista-redonda py-2 d-flex"
           >
             {tarea} 
             <Button 
               color="danger"
-              className="float-right"
+              className="ml-auto align-self-center"
               onClick={() => {removeTarea(tarea)}}
             >
               -
@@ -94,7 +95,7 @@ const TareaInput = ({ initial , handlers }) => {
       </ListGroup>
       <Input 
         className="d-none"
-        type="textarea" 
+        type="text" 
         name="pendiente"
         value={tareasHook.stringArrayToOneString(tareas.todas)}
         innerRef={register()}

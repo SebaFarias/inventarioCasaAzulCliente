@@ -17,6 +17,12 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
       if(itemData[campo] && campo !== "createdAt" && campo !== "updatedAt" && campo !== "_id"){
         data[campo] = itemData[campo]
       }
+      if(campo === "pendiente"){
+        data[campo] = tareas.stringArrayToOneString(itemData[campo])
+      }
+      if(campo === "categorias"){
+        data[campo] = categorias.arrayToText(itemData[campo])
+      }
       return null
     })
     return data

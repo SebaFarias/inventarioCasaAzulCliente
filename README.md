@@ -10,10 +10,12 @@ https://github.com/blakehaswell/mongoose-unique-validator
   [X] Añadir mensaje de Item no ingresado debido a Nombre duplicado
   [X] Agregar Categorías
   [X] Reparar Tareas Pendientes
-  [ ] Agregar Fotos Multer
+  [ ] Agregar Fotos con Multer
 ### Apariencia
-  [ ] Fondo azulado, letras blancas
-  [ ] Botones Celestes, más contraste con los seleccionados
-  [ ] Inputs, Claramente Seleccionados
-  [ ] 
-  [ ] Tabla 
+  [X] Fondo azulado, letras blancas
+  [X] Botones Celestes, más contraste con los seleccionados
+  [X] Formularios
+  [X] Lista Tareas sin fondo blanco
+  [X] Modal de Item
+  [X] Modales de diálogo 
+  [X] Tabla 

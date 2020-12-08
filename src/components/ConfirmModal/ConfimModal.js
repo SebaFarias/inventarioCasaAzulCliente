@@ -15,12 +15,12 @@ const ConfirmModal = ({ open , message , estado , borrar }) => {
     centered
     toggle={() => estado(initial)}
     >
-    <ModalBody>
+    <ModalBody className="modal-fondo">
       {message}
     </ModalBody>
-    <ModalFooter>
+    <ModalFooter className="modal-fondo">
     <Button
-    color="primary"
+    className="boton-azul"
     onClick={() => estado(initial)}
   >
     Cancelar

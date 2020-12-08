@@ -140,12 +140,14 @@ const App = () => {
       centered
       toggle={()=>{setModal({show:false,message:''})}}
       >
-      <ModalBody>
+      <ModalBody
+        className="modal-fondo"
+      >
         {modal.message}
       </ModalBody>
-      <ModalFooter>
+      <ModalFooter className="modal-fondo">
         <Button
-          color="success"
+          className="boton-azul"
           onClick={()=>{setModal({show:false,message:''})}}
         >
           Ok

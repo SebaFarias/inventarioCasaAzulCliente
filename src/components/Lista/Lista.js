@@ -18,7 +18,7 @@ const Lista = ({ loading , data , refresh , verModal , editar}) => {
 const eliminarClick = dato => {
   setDeleteModal({
     show:true,
-    message:`Confirmas que quieres eliminar ${dato.nombre}?`,
+    message:`¿Confirmas que quieres eliminar ${dato.nombre}?`,
     selectedID: dato._id,
   })
 }
@@ -49,8 +49,8 @@ const modalEditar = (e,dato) => {
 
   return(
     <>
-      <Table hover dark>
-        <thead>
+      <Table hover >
+        <thead className="recuadro"> 
           <tr>
             <th>N°</th>
             <th>Nombre</th>
@@ -59,19 +59,19 @@ const modalEditar = (e,dato) => {
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="recuadro">
         {loading?
-        <tr>
+        <tr className="text-white">
         <td align="center" colSpan="4"><Spinner style={{ width: '5rem', height: '5rem' }} /></td>
       </tr>
         :
         data.length < 1?
-        <tr>
+        <tr className="text-white">
           <td align="center" colSpan="4">No existen items en el Inventario</td>
         </tr>
       :
           data.map(( dato , index ) => (
-            <tr key={dato._id} onClick={(e)=>{modalEditar(e,dato)}}>
+            <tr className="text-white" key={dato._id} onClick={(e)=>{modalEditar(e,dato)}}>
               <td>{index+1}</td>
               <td>{dato.nombre}</td>
               <td>{dato.estado}</td>
