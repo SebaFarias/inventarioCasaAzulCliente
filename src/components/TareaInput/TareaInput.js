@@ -23,7 +23,7 @@ const TareaInput = ({ initial , handlers }) => {
     setTareas( prevState => {
       const newTarea = prevState.nueva.trim()
       const newList = prevState.todas
-      if(!newList.includes(newTarea)) newList.push(newTarea)
+      if(newTarea && !newList.includes(newTarea)) newList.push(newTarea)
       return ({
         ...prevState,
         todas: newList,
@@ -67,7 +67,7 @@ const TareaInput = ({ initial , handlers }) => {
         <InputGroupAddon addonType="append">
           <Button
             color="primary"
-            className="form-control mb-2"
+            className="form-control mb-2 boton-azul"
             value={tareas.nueva}
             onClick={addTarea}
           >
@@ -75,7 +75,7 @@ const TareaInput = ({ initial , handlers }) => {
           </Button>
         </InputGroupAddon>
       </InputGroup>
-      <ListGroup flush>
+      <ListGroup flush className="lista-tarea">
         {tareas.todas.map( tarea => {
           return(
           <ListGroupItem 

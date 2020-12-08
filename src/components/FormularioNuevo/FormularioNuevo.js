@@ -36,10 +36,12 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
     })
   }
   return(
-    <Form onSubmit={handleSubmit(checkSubmit)}> 
+    <Form 
+      onSubmit={handleSubmit(checkSubmit)}
+      className="text-white" 
+    > 
     <Button 
-        color="success" 
-        className="my-4"
+        className="my-4 boton-azul"
         onClick={()=>volver()}
       >
         <span>&#60;</span> Volver
@@ -87,7 +89,12 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
       </span>
       </FormGroup>
       <FormGroup>
-      <MultipleSelect title={"Lugar Físico:"} opciones={Campos.lugarFisico} multiple={false} handlers={[register,errors]}/>
+      <MultipleSelect 
+        title={"Lugar Físico:"} 
+        opciones={Campos.lugarFisico} 
+        multiple={false} 
+        handlers={[register,errors]}
+      />
       </FormGroup>
       <FormGroup>
         <Label for="descripcion">
@@ -163,7 +170,14 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
       <TareaInput        
         handlers={[register,errors]}
       />
-      <Button type="submit" color="success">Agregar</Button>
+      <Button 
+        type="submit" 
+        className="my-4 boton-azul"
+        size="lg"
+        block
+      >
+        Agregar
+      </Button>
     </Form>
   )
 }

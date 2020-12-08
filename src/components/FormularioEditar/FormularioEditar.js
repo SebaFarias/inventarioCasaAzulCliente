@@ -51,10 +51,12 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
     })
   }
   return(
-    <Form onSubmit={handleSubmit(checkSubmit)}> 
+    <Form 
+      onSubmit={handleSubmit(checkSubmit)}
+      className="text-white"
+    > 
       <Button 
-        color="success" 
-        className="my-4"
+        className="my-4 boton-azul"
         onClick={()=>volver()}
         >
         <span>&#60;</span> Volver
@@ -185,7 +187,14 @@ const FormularioEditar = ({ item, volver , refresh , verModal }) => {
           initial={item.pendiente}
           handlers={[register,errors]}
         />
-      <Button type="submit" color="success">Guardar</Button>
+          <Button 
+            type="submit" 
+            className="my-4 boton-azul"
+            size="lg"
+            block
+            >
+            Guardar
+          </Button>
     </Form>
   )
 }

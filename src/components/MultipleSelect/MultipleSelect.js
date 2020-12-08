@@ -27,6 +27,7 @@ const MultipleSelect = ( { init , opciones , title , handlers} ) => {
             value={index+1} 
             onClick={() => setSelected(index)} 
             active={selected === index}
+            className="boton-celeste"
             >
             {opcion}
           </Button>

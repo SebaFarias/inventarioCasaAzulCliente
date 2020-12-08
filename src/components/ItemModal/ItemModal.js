@@ -10,7 +10,7 @@ import {
 import categorias from '../../Hooks/categorias'
 
 const ItemModal = ({ data , open , estado, edit , eliminar}) => {
- 
+
   const toggle = () => estado( prevState => {
     return {
       ...prevState,
@@ -22,8 +22,9 @@ const ItemModal = ({ data , open , estado, edit , eliminar}) => {
   return(
     <Modal 
       isOpen={open} 
+      toggle={toggle} 
       centered
-      toggle={toggle}> 
+    >
       <ModalHeader cssModule={{'modal-title': 'w-100 d-flex justify-content-center align-items-center'}}>
         <div className="text-center w-100">{data.nombre}</div>
           <img 

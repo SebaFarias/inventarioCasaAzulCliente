@@ -91,7 +91,7 @@ const Campos = {
       "Limpieza",
       "Aparato",
     ],
-    ["libros"],
+    ["Libros"],
     [
       "Cocina",
       "Dormitorio",

@@ -49,7 +49,7 @@ const modalEditar = (e,dato) => {
 
   return(
     <>
-      <Table hover>
+      <Table hover dark>
         <thead>
           <tr>
             <th>N°</th>

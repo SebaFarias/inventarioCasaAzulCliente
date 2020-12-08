@@ -8,8 +8,9 @@ https://github.com/blakehaswell/mongoose-unique-validator
   [X] Crear Capa intermedia entre el form y la base de datos, El Form va a entregar más campos
   [X] FormularioEditar cargue bien la Ubicación física en default
   [X] Añadir mensaje de Item no ingresado debido a Nombre duplicado
-  [ ] Agregar Categorías
-  [ ] AgregarFotos Multer
+  [X] Agregar Categorías
+  [X] Reparar Tareas Pendientes
+  [ ] Agregar Fotos Multer
 ### Apariencia
   [ ] Fondo azulado, letras blancas
   [ ] Botones Celestes, más contraste con los seleccionados

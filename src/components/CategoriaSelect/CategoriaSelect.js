@@ -49,10 +49,11 @@ const CategoriaSelect = ({ opciones , handlers , initial }) => {
                 return(
                   <React.Fragment key={`${index}-${opcion}`}>
                   <Button 
-                  style={index===0?{marginLeft: '-1px'}:{}}                  
-                  value={opcion} 
-                  onClick={() => handleClick(opcion,index)} 
-                  active={selected[opcion]}
+                    style={index===0?{marginLeft: '-1px'}:{}}                  
+                    value={opcion} 
+                    onClick={() => handleClick(opcion,index)} 
+                    active={selected[opcion]}
+                    className="boton-celeste"
                   >
                     {`${opcion} ${selected[opcion]?'X':''}`}
                   </Button>
@@ -64,10 +65,11 @@ const CategoriaSelect = ({ opciones , handlers , initial }) => {
                         value={subopcion} 
                         onClick={() => handleClick(subopcion)} 
                         active={selected[subopcion]}
-                        >
-                          {`${subopcion} ${selected[subopcion]?'X':''}`}
-                        </Button>
-                      )
+                        className="boton-celeste"
+                      >
+                        {`${subopcion} ${selected[subopcion]?'X':''}`}
+                      </Button>
+                    )
                   }):''}
                   </React.Fragment>
                 )

@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --boton-bg: #39B4C5;  
+  --boton-text: #0F1628;  
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background: linear-gradient(180deg, #003376 75.56%, #001633 96.46%);
+  min-height: 100vh;
+}
+.boton-azul { 
+  color: var(--boton-text) !important; 
+  background-color: var(--boton-bg) !important; 
+  border: 3px solid var(--boton-text) !important; 
+  font-weight: 900 !important;
+}  
+.boton-azul:hover, 
+.boton-azul:focus, 
+.open .dropdown-toggle.boton-azul { 
+  background-color: var(--boton-text) !important; 
+  color: var(--boton-bg) !important; 
+} 
+.boton-azul:focus,
+.boton-celeste:focus{
+  box-shadow: 0 0 3px 3px var(--boton-bg) !important;
+}
+.boton-azul:active, 
+.boton-azul.active, 
+.open .dropdown-toggle.boton-azul { 
+  transform: translateY(5px) !important;
+  background-image: none !important; 
+} 
+.boton-celeste { 
+  color: var(--boton-text) !important; 
+  background-color: var(--boton-bg) !important; 
+  border-color: var(--boton-bg) !important; 
+} 
+.boton-celeste:hover, 
+.boton-celeste:active, 
+.boton-celeste.active, 
+.open .dropdown-toggle.boton-celeste { 
+  color: var(--boton-bg) !important; 
+  background-color: var(--boton-text) !important; 
+} 
+.boton-celeste:active, 
+.boton-celeste.active, 
+.open .dropdown-toggle.boton-celeste { 
+  background-image: none; 
+} 
+.lista-tareas{
+  background-color: rgba(15, 22, 40, 0.15) !important;
+  border-radius: 2rem;
+}
+input,
+select,
+textarea{
+  color: white !important;
+  background:rgba(15, 22, 40, 0.75) !important;
+  border-color: var(--boton-text) !important;
 }

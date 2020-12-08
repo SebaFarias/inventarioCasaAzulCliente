@@ -89,7 +89,7 @@ const App = () => {
                   <Button 
                     onClick={mostrarFormularioNuevo} 
                     color="success"
-                    className="my-4"
+                    className="my-4 boton-azul"
                   >
                     + Nuevo
                   </Button>
@@ -133,7 +133,7 @@ const App = () => {
   
   return (
   <Container className={state.show==='index'?'text-center':''} >
-    <h1 className="text-center my-4">{state.title}</h1>
+    <h1 className="text-center my-4 text-white">{state.title}</h1>
     { main(state.show) }
     <Modal 
       isOpen={modal.show}
