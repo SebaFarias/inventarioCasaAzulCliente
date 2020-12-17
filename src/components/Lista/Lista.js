@@ -54,8 +54,9 @@ const modalEditar = (e,dato) => {
           <tr>
             <th>N°</th>
             <th>Nombre</th>
-            <th>Estado</th>
-            <th>Lugar</th>
+            <th>Valor</th>
+            {/* <th>Estado</th>
+            <th>Lugar</th> */}
           </tr>
         </thead>
 
@@ -74,8 +75,9 @@ const modalEditar = (e,dato) => {
             <tr className="text-white" key={dato._id} onClick={(e)=>{modalEditar(e,dato)}}>
               <td>{index+1}</td>
               <td>{dato.nombre}</td>
-              <td>{dato.estado}</td>
-              <td>{dato.lugarFisico}</td>
+              <td>{dato.valorFinal? dato.valorFinal : dato.valorEstimado}</td>
+              {/* <td>{dato.estado}</td>
+              <td>{dato.lugarFisico}</td> */}
             </tr>
           ))}
         </tbody>
