@@ -19,7 +19,7 @@ const App = () => {
     message:'',
   })
   const [ state , setState ] = useState({
-    title: 'Inventario Casa Azul',
+    title: 'Ingresos Casa Azul',
     data: [],
     show: 'index',
     selected: null,
@@ -56,7 +56,7 @@ const App = () => {
           return({
           ...prevState,
           show:"index",
-          title: "Inventario Casa Azul",
+          title: "Ingresos Casa Azul",
         })
       })
     }
