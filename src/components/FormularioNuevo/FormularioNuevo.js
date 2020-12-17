@@ -11,7 +11,11 @@ import TareaInput from '../TareaInput/TareaInput'
 
 const FormularioNuevo = ({ volver, refresh , verModal }) => {
 
-  const {register, errors, handleSubmit} = useForm()
+  const {register, errors, handleSubmit} = useForm(
+    {
+    defaultValues: {destino: 'Feria Navideña' }
+}
+)
   const checkSubmit = async (data) => {
     data.categorias = categorias.textToArray(data.categorias)
     data.pendiente = tareas.oneStringToStringArray(data.pendiente)
@@ -23,7 +27,7 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
     })
   }
   const [campos , setCampos] = useState({
-    destinoIsFeria: false,
+    destinoIsFeria: true,
   })
   const handleDestino = event => {
     const isFeria = event.target.value === "Feria Navideña"
