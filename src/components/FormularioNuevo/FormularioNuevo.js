@@ -72,12 +72,14 @@ const FormularioNuevo = ({ volver, refresh , verModal }) => {
           name="estado" 
           id="estado" 
           defaultValue=""
-          innerRef={register({
-            required: {
-              value: true,
-              message: "El Estado es Obligatorio",
-            }
-          })}>
+          innerRef={register(
+          //   {
+          //   required: {
+          //     value: true,
+          //     message: "El Estado es Obligatorio",
+          //   }
+          // }
+          )}>
             <option disabled value=''>Elige uno...</option>
           {Campos.estado.map( estado => {
             return <option key={estado}>{estado}</option>

@@ -48,12 +48,13 @@ const MultipleSelect = ( { init , opciones , title , handlers} ) => {
           name="lugarFisico" 
           id="lugarFisico" 
           defaultValue=""
-          innerRef={register({
-            required: {
-              value: true,
-              message: "El Lugar es Obligatorio",
-            }
-          })}>
+          innerRef={register(
+            // {
+            // required: {
+            //   value: true,
+            //   message: "El Lugar es Obligatorio",
+            // }}
+            )}>
             <option disabled value=''>Elige uno...</option>
           {opciones[selected+1].map( lugar => {
             return <option key={lugar}>{lugar}</option>
